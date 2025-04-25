@@ -62,3 +62,31 @@ ll countDays(ll month, ll year) {
     if (month == 2) return 28 + (year % 400 == 0 || year % 4 == 0 && year % 100 != 0);
     return 30 + (month % 2 && month < 8 || month % 2 == 0 && month > 7);
 }
+
+std::vector<std::vector<std::vector<Date>>> Year(ll year) {
+    std::vector<std::vector<std::vector<Date>>> res(13);
+    Date d(1, 1, year);
+    ll f = ((year - 1) * 365 + (year - 1) / 400 + (year - 1) / 4 - (year - 1) / 100) % 7;
+    while (f > 0) {
+        --f;
+        --d;
+    }
+    for (int i = 0; i <= 12; ++i) {
+        res[i].resize(7, std::vector<Date>(6));
+        for (int j = 0; j < 6; ++j) {
+            for (int k = 0; k < 7; ++k) {
+                res[i][k][j] = d;
+                ++d;
+                ++f;
+            }
+            f = 0;
+        }
+        if (i <= 11) {
+            for (int j = 0; j < 7 || d > Date(1, i + 1, year) || f != 0; ++j) {
+                --d;
+                f = (f + 6) % 7;
+            }
+        }
+    }
+    return res;
+}
