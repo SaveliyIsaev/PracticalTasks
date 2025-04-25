@@ -1,11 +1,47 @@
-﻿#include <vector>
+#include <vector>
 #include <SFML/Graphics.hpp>
 #include <fstream>
-#include "Back.hpp"
-#include "Front.hpp"
+#include "DecartTree.hpp"
+#include "Date.hpp"
+#include "Button.hpp"
+
+
+void openNotesWindow(Date d, Tree& notes) {
+
+    std::wstring str = notes.value(d);
+    sf::RenderWindow win(sf::VideoMode({ 500, 500 }), "GOOOOOOOL");
+    std::vector<std::wstring> v;
+    for (int i = 0; i < str.size(); ++i) {
+        if (str[i] == '\n') v.push_back(L"");
+        else v.back() += str[i];
+    }
+    sf::Font font("Caveat-VariableFont_wght.ttf");
+    while (win.isOpen()) {
+        while (const std::optional event = win.pollEvent()) {
+            if (event->is<sf::Event::Closed>()) win.close();
+            else if (auto textEntered = event->getIf<sf::Event::TextEntered>()) {
+                str += textEntered->unicode;
+            }
+        }
+        v.clear();
+        v.push_back(L"");
+        for (int i = 0; i < str.size(); ++i) {
+            if (str[i] == '\n') v.push_back(L"");
+            else v.back().push_back(str[i]);
+        }
+        win.clear(sf::Color::White);
+        for (int i = 0; i < v.size(); ++i) {
+            sf::Text text(font, v[i]);
+            text.setPosition({ 30.f, i * 40.f });
+            win.draw(text);
+        }
+        win.display();
+    }
+    notes.update(d, str);
+    std::wcout << str << '\n';
+}
 
 sf::Font font("Caveat-VariableFont_wght.ttf");
-
 const int butt_size = 40;
 
 int main() {
@@ -15,18 +51,18 @@ int main() {
     for (std::string& s : names) fin >> s;
     fin.close();
     ll year = 2025;
-    Button year_butt({ 125 + 4 * (8 * butt_size + 10), 50}, {200, 60}, std::to_string(year));
-    Button incr({ 335 + 4 * (8 * butt_size + 10), 55}, {50, 50}, "incr"), decr({(105 + 4 * (8 * butt_size)), 55}, {50, 50}, "decr");
+    Button year_butt({ 125 + 4 * (8 * butt_size + 10), 50 }, { 200, 60 }, std::to_string(year));
+    Button incr({ 335 + 4 * (8 * butt_size + 10), 55 }, { 50, 50 }, "incr"), decr({ (105 + 4 * (8 * butt_size)), 55 }, { 50, 50 }, "decr");
     sf::RenderWindow window(sf::VideoMode({ 1920, 1080 }), "GOYDA");
     std::vector<std::vector<std::vector<sf::RectangleShape>>> shapes(3, std::vector<std::vector<sf::RectangleShape>>(4));
-    std::vector<std::vector<std::vector<sf::Text>>> texts(3, std::vector<std::vector<sf::Text>>(4, std::vector<sf::Text>(0, sf::Text(font)))); 
+    std::vector<std::vector<std::vector<sf::Text>>> texts(3, std::vector<std::vector<sf::Text>>(4, std::vector<sf::Text>(0, sf::Text(font))));
     std::vector<std::vector<std::vector<std::vector<Button>>>> days(3, std::vector<std::vector<std::vector<Button>>>(4, std::vector<std::vector<Button>>(7, std::vector<Button>(6))));
     std::vector<std::vector<std::vector<Date>>> dates = Year(year);
     for (int row = 0; row < 3; ++row) {
         for (int col = 0; col < 4; ++col) {
             for (int i = 0; i < 7; ++i) {
                 for (int j = 0; j < 6; ++j) {
-                    days[row][col][i][j] = Button({i * butt_size + col * (butt_size * 8.f + 10) + 28, 50 + butt_size * (j + 1) + row * (butt_size * 8.f + 10) + 3}, {butt_size - 5, butt_size - 5}, std::to_string(dates[row * 4 + col + 1][i][j].day_));
+                    days[row][col][i][j] = Button({ i * butt_size + col * (butt_size * 8.f + 10) + 28, 50 + butt_size * (j + 1) + row * (butt_size * 8.f + 10) + 3 }, { butt_size - 5, butt_size - 5 }, std::to_string(dates[row * 4 + col + 1][i][j].day_));
                     if (dates[row * 4 + col + 1][i][j].month_ != row * 4 + col + 1) {
                         days[row][col][i][j].color_ = sf::Color::White;
                         days[row][col][i][j].text_color_ = sf::Color(150, 150, 150);
@@ -57,7 +93,7 @@ int main() {
             texts[row][col][0].setFillColor(sf::Color::Black);
             for (int i = 1; i <= 7; ++i) {
                 texts[row][col][i] = sf::Text(font, names[i + 12], 22);
-                texts[row][col][i].setPosition({ col * (8 * butt_size + 10.f) + butt_size * (i - 1) + 28, row * (8 * butt_size + 10.f) + 20 +  butt_size});
+                texts[row][col][i].setPosition({ col * (8 * butt_size + 10.f) + butt_size * (i - 1) + 28, row * (8 * butt_size + 10.f) + 20 + butt_size });
                 texts[row][col][i].setFillColor(sf::Color::Black);
             }
         }
@@ -124,7 +160,7 @@ int main() {
             }
         }
         window.clear(sf::Color::White);
-        for (int row = 0; row < 3; ++ row) 
+        for (int row = 0; row < 3; ++row)
             for (int col = 0; col < 4; ++col) {
                 for (int i = 0; i < 16; ++i) window.draw(shapes[row][col][i]);
                 for (int i = 0; i < 8; ++i) window.draw(texts[row][col][i]);
