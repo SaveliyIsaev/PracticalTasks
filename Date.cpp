@@ -56,3 +56,9 @@ Date Date::operator=(Date other) {
 Date::operator std::string() const {
     return std::to_string(day_) + "." + std::to_string(month_) + "." + std::to_string(year_);
 }
+
+ll countDays(ll month, ll year) {
+    if (month < 1 || month > 12) throw std::logic_error("Wrong Date");
+    if (month == 2) return 28 + (year % 400 == 0 || year % 4 == 0 && year % 100 != 0);
+    return 30 + (month % 2 && month < 8 || month % 2 == 0 && month > 7);
+}
