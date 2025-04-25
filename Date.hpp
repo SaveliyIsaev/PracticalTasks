@@ -19,3 +19,5 @@ public:
     Date operator=(Date other);
     operator std::string() const;
 };
+
+ll countDays(ll month, ll year);
