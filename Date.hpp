@@ -21,3 +21,5 @@ public:
 };
 
 ll countDays(ll month, ll year);
+
+std::vector<std::vector<std::vector<Date>>> Year(ll year);
