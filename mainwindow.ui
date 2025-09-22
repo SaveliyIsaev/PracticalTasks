@@ -1,0 +1,161 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>MainWindow</class>
+ <widget class="QMainWindow" name="MainWindow">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>800</width>
+    <height>594</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>MainWindow</string>
+  </property>
+  <widget class="QWidget" name="centralwidget">
+   <widget class="QPushButton" name="enterButton">
+    <property name="geometry">
+     <rect>
+      <x>685</x>
+      <y>15</y>
+      <width>100</width>
+      <height>75</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Enter
+a polynom</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="equalButton">
+    <property name="geometry">
+     <rect>
+      <x>15</x>
+      <y>15</y>
+      <width>100</width>
+      <height>75</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Check Equality</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="plusButton">
+    <property name="geometry">
+     <rect>
+      <x>685</x>
+      <y>240</y>
+      <width>100</width>
+      <height>75</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Add</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="rootsButton">
+    <property name="geometry">
+     <rect>
+      <x>685</x>
+      <y>475</y>
+      <width>100</width>
+      <height>75</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Find 
+the roots</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="derButton">
+    <property name="geometry">
+     <rect>
+      <x>15</x>
+      <y>475</y>
+      <width>100</width>
+      <height>75</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Derivative</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="minusButton">
+    <property name="geometry">
+     <rect>
+      <x>15</x>
+      <y>240</y>
+      <width>100</width>
+      <height>75</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Substraction</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="multButton">
+    <property name="geometry">
+     <rect>
+      <x>350</x>
+      <y>15</y>
+      <width>100</width>
+      <height>75</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Multiplicate</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="divButton">
+    <property name="geometry">
+     <rect>
+      <x>350</x>
+      <y>475</y>
+      <width>100</width>
+      <height>75</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Divide</string>
+    </property>
+   </widget>
+   <widget class="QScrollArea" name="scrollArea">
+    <property name="geometry">
+     <rect>
+      <x>150</x>
+      <y>128</y>
+      <width>500</width>
+      <height>300</height>
+     </rect>
+    </property>
+    <property name="widgetResizable">
+     <bool>true</bool>
+    </property>
+    <widget class="QWidget" name="scrollAreaWidgetContents">
+     <property name="geometry">
+      <rect>
+       <x>0</x>
+       <y>0</y>
+       <width>498</width>
+       <height>298</height>
+      </rect>
+     </property>
+    </widget>
+   </widget>
+  </widget>
+  <widget class="QMenuBar" name="menubar">
+   <property name="geometry">
+    <rect>
+     <x>0</x>
+     <y>0</y>
+     <width>800</width>
+     <height>22</height>
+    </rect>
+   </property>
+  </widget>
+  <widget class="QStatusBar" name="statusbar"/>
+ </widget>
+ <resources/>
+ <connections/>
+</ui>
