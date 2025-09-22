@@ -5,6 +5,17 @@
 #include <bitset>
 #include "math.hpp"
 
+using ll = long long;
+using ld = long double;
+ld fastpow(ld x, ll m) {
+ ld ans = 1;
+ for (ll i = 1; i <= m; ++i) {
+  if (i & m) ans *= x;
+  x *= x;
+ }
+ return ans;
+}
+
 class Monomial {
  public:
   Monomial();
@@ -42,3 +53,4 @@ class Monomial {
   std::vector<ll> pows;
   ld coef;
 };
+
