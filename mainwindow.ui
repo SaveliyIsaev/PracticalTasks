@@ -17,7 +17,7 @@
    <widget class="QPushButton" name="enterButton">
     <property name="geometry">
      <rect>
-      <x>685</x>
+      <x>680</x>
       <y>15</y>
       <width>100</width>
       <height>75</height>
@@ -31,8 +31,8 @@ a polynom</string>
    <widget class="QPushButton" name="equalButton">
     <property name="geometry">
      <rect>
-      <x>15</x>
-      <y>15</y>
+      <x>240</x>
+      <y>465</y>
       <width>100</width>
       <height>75</height>
      </rect>
@@ -44,17 +44,17 @@ a polynom</string>
    <widget class="QPushButton" name="plusButton">
     <property name="geometry">
      <rect>
-      <x>685</x>
-      <y>240</y>
+      <x>20</x>
+      <y>165</y>
       <width>100</width>
       <height>75</height>
      </rect>
     </property>
     <property name="text">
-     <string>Add</string>
+     <string>Addition</string>
     </property>
    </widget>
-   <widget class="QPushButton" name="rootsButton">
+   <widget class="QPushButton" name="valueButton">
     <property name="geometry">
      <rect>
       <x>685</x>
@@ -65,14 +65,15 @@ a polynom</string>
     </property>
     <property name="text">
      <string>Find 
-the roots</string>
+the value
+ in a point</string>
     </property>
    </widget>
    <widget class="QPushButton" name="derButton">
     <property name="geometry">
      <rect>
-      <x>15</x>
-      <y>475</y>
+      <x>20</x>
+      <y>465</y>
       <width>100</width>
       <height>75</height>
      </rect>
@@ -84,8 +85,8 @@ the roots</string>
    <widget class="QPushButton" name="minusButton">
     <property name="geometry">
      <rect>
-      <x>15</x>
-      <y>240</y>
+      <x>20</x>
+      <y>315</y>
       <width>100</width>
       <height>75</height>
      </rect>
@@ -97,8 +98,8 @@ the roots</string>
    <widget class="QPushButton" name="multButton">
     <property name="geometry">
      <rect>
-      <x>350</x>
-      <y>15</y>
+      <x>680</x>
+      <y>165</y>
       <width>100</width>
       <height>75</height>
      </rect>
@@ -110,8 +111,8 @@ the roots</string>
    <widget class="QPushButton" name="divButton">
     <property name="geometry">
      <rect>
-      <x>350</x>
-      <y>475</y>
+      <x>680</x>
+      <y>315</y>
       <width>100</width>
       <height>75</height>
      </rect>
@@ -120,28 +121,98 @@ the roots</string>
      <string>Divide</string>
     </property>
    </widget>
+   <widget class="QWidget" name="verticalLayoutWidget">
+    <property name="geometry">
+     <rect>
+      <x>180</x>
+      <y>130</y>
+      <width>411</width>
+      <height>291</height>
+     </rect>
+    </property>
+    <layout class="QVBoxLayout" name="verticalLayout">
+     <property name="sizeConstraint">
+      <enum>QLayout::SizeConstraint::SetMinimumSize</enum>
+     </property>
+    </layout>
+   </widget>
    <widget class="QScrollArea" name="scrollArea">
     <property name="geometry">
      <rect>
-      <x>150</x>
-      <y>128</y>
-      <width>500</width>
-      <height>300</height>
+      <x>180</x>
+      <y>130</y>
+      <width>411</width>
+      <height>291</height>
      </rect>
     </property>
     <property name="widgetResizable">
      <bool>true</bool>
+    </property>
+    <property name="alignment">
+     <set>Qt::AlignmentFlag::AlignLeading|Qt::AlignmentFlag::AlignLeft|Qt::AlignmentFlag::AlignTop</set>
     </property>
     <widget class="QWidget" name="scrollAreaWidgetContents">
      <property name="geometry">
       <rect>
        <x>0</x>
        <y>0</y>
-       <width>498</width>
-       <height>298</height>
+       <width>409</width>
+       <height>289</height>
       </rect>
      </property>
     </widget>
+   </widget>
+   <widget class="QPushButton" name="loadButton">
+    <property name="geometry">
+     <rect>
+      <x>460</x>
+      <y>15</y>
+      <width>100</width>
+      <height>75</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Load</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="saveButton">
+    <property name="geometry">
+     <rect>
+      <x>240</x>
+      <y>15</y>
+      <width>100</width>
+      <height>75</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Save</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="magicButton">
+    <property name="geometry">
+     <rect>
+      <x>20</x>
+      <y>15</y>
+      <width>100</width>
+      <height>75</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Magic</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="rootsButton">
+    <property name="geometry">
+     <rect>
+      <x>460</x>
+      <y>465</y>
+      <width>100</width>
+      <height>75</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Find the roots</string>
+    </property>
    </widget>
   </widget>
   <widget class="QMenuBar" name="menubar">

@@ -2,6 +2,9 @@
 #define MAINWINDOW_H
 
 #include <QMainWindow>
+#include <QLabel>
+#include "List.hpp"
+#include "Polynomial.hpp"
 
 QT_BEGIN_NAMESPACE
 namespace Ui {
@@ -32,9 +35,21 @@ private slots:
 
     void on_derButton_clicked();
 
+    void on_valueButton_clicked();
+
     void on_rootsButton_clicked();
+
+    void on_loadButton_clicked();
+
+    void on_saveButton_clicked();
+
+    void on_magicButton_clicked();
 
 private:
     Ui::MainWindow *ui;
+    List<Polynomial> lst;
+    List<QPair<QLabel*, int>> num;
+
+    void AddAPolynomial(Polynomial);
 };
 #endif // MAINWINDOW_H
