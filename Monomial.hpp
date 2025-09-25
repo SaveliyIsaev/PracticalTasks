@@ -1,4 +1,4 @@
-#pragma once;
+#pragma once
 
 #ifndef MONOMIAL_HPP
 #define MONOMIAL_HPP

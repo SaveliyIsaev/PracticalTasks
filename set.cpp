@@ -62,6 +62,21 @@ T set<T>::mx() {
     return mx(root)->key_;
 }
 
+
+template<typename T>
+typename set<T>::iterator set<T>::mn(set<T>::iterator n) {
+    if (!n) return nullptr;
+    if (n->l_ == nullptr) return n;
+    return mn(n->l_);
+}
+
+
+//public
+template<typename T>
+T set<T>::mn() {
+    if (!root) return T(0);
+    return mn(root)->key_;
+}
 template<typename T>
 void set<T>::insert(T key) {
     if (key == T(0)) return;

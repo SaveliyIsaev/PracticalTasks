@@ -38,7 +38,7 @@ Monomial Monomial::operator+(Monomial m) {
     if (coef == 0) return m;
     if (m.coef == 0) return *this;
     for (int i = 0; i < 26; ++i) {
-        if (m.pows[i] != pows[i]) throw "NOT FUCKING SIMILAR U STUPID PIECE O' SHIT";
+        if (m.pows[i] != pows[i]) throw "Я НЕ БУДУ НЕПОДОБНЫЕ ОДНОЧЛЕНЫ СКЛАДЫВАТЬ, ДОЛБОЕБА КУСОК";
     }
     if (coef == -m.coef) return Monomial(0);
     return Monomial(coef + m.coef, pows);
@@ -56,11 +56,11 @@ Monomial Monomial::operator*(Monomial m) {
 }
 
 Monomial Monomial::operator/(Monomial m) {
-    if (m.coef == 0) throw "GET THE FUCK OUT OF HERE U SHIT, I WILL NOT DIVIDE THIS BY ZERO, BUT I WILL DIVIDE MY WRATH IF U CONTINUE DOING THIS";
+    if (m.coef == 0) throw "СЪЕБИ НАХУЙ ОТСЮДА, ЕДИСТВЕННОЕ, ЧТО Я БУДУ ДЕЛАТЬ С НУЛЕМ - ЭТО ДОМНОЖАТЬ БОШКУ ТВОЮ НА НЕГО";
     if (coef == 0) return Monomial(0);
     std::vector<ll> pws(26);
     for (int i = 0; i < 26; ++i) {
-        if (pows[i] < m.pows[i]) throw "DIE STUPID BASTARD, POWERS CAN BE ONLY NATURAL OR ZERO AND NOT FUCKING NEGATIVE";
+        if (pows[i] < m.pows[i]) throw "СДОХНИ ТВАРЬ, Я НЕ БУДУ РАБОАТЬ С ОТРИЦАТЕЛЬНЫМИ СТЕПЕНЯМИ";
         pws[i] = pows[i] - m.pows[i];
     }
     return Monomial(coef / m.coef, pws);
@@ -198,7 +198,7 @@ std::stringstream& operator>>(std::stringstream& s, Monomial& m) {
                 st = 4;
                 v = c;
             } else {
-                throw "WHAT THE FUCK IS THIS PIECE O' SHIT U STUPID FUCKER";
+                throw "ЧЕ ЗА ХУЙНЮ ТЫ ВВЕЛ ЕПТА";
             }
         } else if (st == 1) {
             if (c >= '0' && c <= '9') {
@@ -212,7 +212,7 @@ std::stringstream& operator>>(std::stringstream& s, Monomial& m) {
                 st = 4;
                 v = c;
             } else {
-                throw "WHAT THE FUCK IS THIS PIECE O' SHIT U STUPID FUCKER";
+                throw "ЧЕ ЗА ХУЙНЮ ТЫ ВВЕЛ ЕПТА";
             }
         } else if (st == 2) {
             if (c >= '0' && c <= '9') {
@@ -225,7 +225,7 @@ std::stringstream& operator>>(std::stringstream& s, Monomial& m) {
                 st = 4;
                 v = c;
             } else {
-                throw "WHAT THE FUCK IS THIS PIECE O' SHIT U STUPID FUCKER";
+                throw "ЧЕ ЗА ХУЙНЮ ТЫ ВВЕЛ ЕПТА";
             }
         } else if (st == 3) {
             if (c >= '0' && c <= '9') {
@@ -233,7 +233,7 @@ std::stringstream& operator>>(std::stringstream& s, Monomial& m) {
                 pp *= .1;
                 st = 5;
             } else {
-                throw "WHAT THE FUCK IS THIS PIECE O' SHIT U STUPID FUCKER";
+                throw "ЧЕ ЗА ХУЙНЮ ТЫ ВВЕЛ ЕПТА";
             }
         } else if (st == 4) {
             if (c == '^') {
@@ -243,7 +243,7 @@ std::stringstream& operator>>(std::stringstream& s, Monomial& m) {
                 ++pows[v - 'a'];
                 v = c;
             } else {
-                throw "WHAT THE FUCK IS THIS PIECE O' SHIT U STUPID FUCKER";
+                throw "ЧЕ ЗА ХУЙНЮ ТЫ ВВЕЛ ЕПТА";
             }
         } else if (st == 5) {
             if (c >= '0' && c <= '9') {
@@ -254,14 +254,14 @@ std::stringstream& operator>>(std::stringstream& s, Monomial& m) {
                 st = 4;
                 v = c;
             } else {
-                throw "WHAT THE FUCK IS THIS PIECE O' SHIT U STUPID FUCKER";
+                throw "ЧЕ ЗА ХУЙНЮ ТЫ ВВЕЛ ЕПТА";
             }
         } else if (st == 6) {
             if (c >= '0' && c <= '9') {
                 p = p * 10 + (c - '0');
                 st = 7;
             } else {
-                throw "WHAT THE FUCK IS THIS PIECE O' SHIT U STUPID FUCKER";
+                throw "ЧЕ ЗА ХУЙНЮ ТЫ ВВЕЛ ЕПТА";
             }
         } else if (st == 7) {
             if (c >= 'a' && c <= 'z') {
@@ -273,11 +273,11 @@ std::stringstream& operator>>(std::stringstream& s, Monomial& m) {
                 p = p * 10 + (c - '0');
                 st = 7;
             } else {
-                throw "WHAT THE FUCK IS THIS PIECE O' SHIT U STUPID FUCKER";
+                throw "ЧЕ ЗА ХУЙНЮ ТЫ ВВЕЛ ЕПТА";
             }
         }
     }
-    if (st != 0 && st != 2 && st != 4 && st != 5 && st != 7) throw "WHAT THE FUCK IS THIS PIECE O' SHIT U STUPID FUCKER";
+    if (st != 0 && st != 2 && st != 4 && st != 5 && st != 7) throw "ЧЕ ЗА ХУЙНЮ ТЫ ВВЕЛ ЕПТА";
     if (st == 4) {
         ++pows[v - 'a'];
     }

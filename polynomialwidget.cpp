@@ -26,7 +26,7 @@ void PolynomialWidget::on_editButton_clicked() {
         ss << s;
         ss >> p->val;
     } catch (const char *x) {
-        QMessageBox::information(nullptr, "Error", x);
+        QMessageBox::information(nullptr, "ОШИБКА БЛЯТЬ", x);
         return;
     }
     ui->label->setText((std::string(p->val)).data());

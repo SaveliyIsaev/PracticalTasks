@@ -20,15 +20,15 @@ struct List {
     Node *insert(Node*, T);
     Node *insert(Node*, Node*);
     Node *erase(Node*);
-    List<T>& operator=(List<T>&);
-    List<T>& operator=(List<T>&&);
-    List<T>() {}
-    List<T>(ll n) {
+    List& operator=(List<T>&);
+    List& operator=(List<T>&&);
+    List() {}
+    List(ll n) {
         for (int i = 0; i < n; ++i) insert(nullptr, new Node());
     }
-    List<T>(List<T>&);
-    List<T>(List<T>&&);
-    ~List<T>();
+    List(List<T>&);
+    List(List<T>&&);
+    ~List();
 };
 
 

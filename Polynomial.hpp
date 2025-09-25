@@ -54,6 +54,7 @@ public:
     }
     std::bitset<26> used();
     ll size();
+    std::vector<ll> roots();
 private:
     set<Monomial> mons;
 };

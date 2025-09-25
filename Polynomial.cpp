@@ -97,13 +97,13 @@ Polynomial Polynomial::operator*(Polynomial p) {
 std::pair<Polynomial, Polynomial> Polynomial::operator/(Polynomial p) {
     Polynomial m = *this;
     if (p.size() == 0 || p.size() == 1 && p.mons.find(Monomial(0))) {
-        throw "GET THE FUCK OUT OF HERE U SHIT, I WILL NOT DIVIDE THIS BY ZERO, BUT I WILL DIVIDE MY WRATH IF U CONTINUE DOING THIS";
+        throw "СЪЕБИ НАХУЙ ОТСЮДА, ЕДИСТВЕННОЕ, ЧТО Я БУДУ ДЕЛАТЬ С НУЛЕМ - ЭТО ДОМНОЖАТЬ БОШКУ ТВОЮ НА НЕГО";
     }
     if (this->size() == 0) {
         return {*this, *this};
     }
     if (used().count() > 1 || p.used().count() > 1) throw "STIRB, DU DUMMES ARSCHLOCH, ICH WERDE KEINE POLYNOME MIT MEHREREN VARIABLEN TEILEN HURE DU BIST DUMM";
-    if (used() != p.used() && p.used().count() && used().count()) throw L"я не буду x на y делить";
+    if (used() != p.used() && p.used().count() && used().count()) throw L"ИДИ НАХУЙ, Я НЕ БУДУ Х НА У ДЕЛИТЬ";
     Polynomial ans;
     Monomial x;
     while (!m.mons.empty()) {
@@ -164,6 +164,7 @@ Polynomial::operator std::string() {
     for (auto x = l.begin; x != nullptr; x = x->next) {
         std::string s = x->val;
         if (s[0] != '-') s = "+ " + s;
+        else s.insert(s.begin() + 1, ' ');
         res += " " + s;
     }
     if (!res.empty() && res[0] == ' ') res.erase(res.begin());
@@ -201,8 +202,19 @@ std::istream& operator>>(std::istream& s, Polynomial& p) {
     std::getline(s, str);
     std::stringstream ss;
     Monomial m;
+    char lst = 0;
+    bool sp = 1;
     for (int i = 0; i < str.size(); ++i) {
-        if (str[i] == ' ') continue;
+        if (str[i] == ' ') {
+            sp = 1;
+            continue;
+        } else {
+            if (lst >= '0' && lst <= '9' && sp && str[i] >= '0' && str[i] <= '9') {
+                throw "ЧЕ ЗА ХУЙНЮ ТЫ ВВЕЛ ЕПТА";
+            }
+            lst = str[i];
+            sp = 0;
+        }
         if (str[i] == '-' || str[i] == '+') {
             ss >> m;
             p += m;
@@ -214,4 +226,43 @@ std::istream& operator>>(std::istream& s, Polynomial& p) {
     ss >> m;
     p += m;
     return s;
+}
+
+std::vector<ll> Polynomial::roots() {
+    if (used().count() > 1) {
+        throw "ДА БЛЯ, Я НЕ БУДУ КОРНИ ИЗ ТЫСЯЧИ ПЕРЕМЕННЫХ ХУЯРИТЬ";
+    }
+    if (mons.size() == 0) {
+        return {INT64_MAX};
+    }
+    Polynomial pl = *this;
+    std::vector<ll> ans;
+    Monomial m;
+    if ((m = pl.mons.mn()).used() != 0) {
+        ans.push_back(0);
+        pl /= Monomial(1, m.getPows());
+    }
+    while (m.getCoef() != (ll)m.getCoef()) {
+        pl *= 10;
+        m *= 10;
+    }
+    ll x = m.getCoef();
+    std::vector<ld> pws(26);
+    std::vector<ll> p = mons.mx().getPows();
+    ll z;
+    for (z  = 0; z < 26; ++z) {
+        if (p[z]) break;
+    }
+    for (int i = 1; i * i <= abs(x); ++i) {
+        if (x % i) continue;
+        pws[z] = i;
+        if (pl[pws] == 0) ans.push_back(i);
+        pws[z] = -i;
+        if (pl[pws] == 0) ans.push_back(-i);
+        pws[z] = x / i;
+        if (pl[pws] == 0) ans.push_back(x / i);
+        pws[z] = -x / i;
+        if (pl[pws] == 0) ans.push_back(-x / i);
+    }
+    return ans;
 }

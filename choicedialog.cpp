@@ -1,7 +1,8 @@
 #include "choicedialog.h"
 #include "ui_choicedialog.h"
 #include <sstream>
-
+#include <QVBoxLayout>
+#include <QMessageBox>
 ChoiceDialog::ChoiceDialog(List<Polynomial>* lst_, Polynomial* p_, bool* ok_, QWidget *parent) : QDialog(parent), ui(new Ui::ChoiceDialog) {
     ui->setupUi(this);
     p = p_;
@@ -24,7 +25,13 @@ void ChoiceDialog::on_ChoiceDialog_accepted() {
     }
     if (ui->radioButton_2->isChecked()) {
         std::stringstream s(ui->lineEdit->text().toStdString());
-        s >> *p;
+        try {
+            s >> *p;
+        } catch (const char* x) {
+            QMessageBox::information(nullptr, "ОШИБКА ЕПТА", x);
+            *ok = 0;
+            return;
+        }
         return;
     }
     *ok = 0;

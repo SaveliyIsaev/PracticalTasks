@@ -61,6 +61,8 @@ public:
     };
     Node* mx(Node*);
     T mx();
+    Node* mn(Node*);
+    T mn();
     void insert(T);
     Node* find(Node*, T);
     bool find(T);

@@ -37,7 +37,7 @@ void MainWindow::on_multButton_clicked() {
         d2.exec();
         if (!ok) return;
     } catch(const char* x) {
-        QMessageBox::information(nullptr, "Error", x);
+        QMessageBox::information(nullptr, "ОШИБКА БЛЯТЬ", x);
         return;
     }
     Polynomial p = p1 * p2;
@@ -58,14 +58,14 @@ void MainWindow::on_divButton_clicked() {
         d2.exec();
         if (!ok) return;
     } catch(const char* x) {
-        QMessageBox::information(nullptr, "Error", x);
+        QMessageBox::information(nullptr, "ОШИБКА БЛЯТЬ", x);
         return;
     }
     QPair<Polynomial, Polynomial> p;
     try {
         p = p1 / p2;
     } catch (const char* x) {
-        QMessageBox::information(nullptr, "Error", x);
+        QMessageBox::information(nullptr, "ОШИБКА БЛЯТЬ", x);
         return;
     }
 
@@ -89,7 +89,7 @@ void MainWindow::on_minusButton_clicked() {
         d2.exec();
         if (!ok) return;
     } catch(const char* x) {
-        QMessageBox::information(nullptr, "Error", x);
+        QMessageBox::information(nullptr, "ОШИБКА БЛЯТЬ", x);
         return;
     }
     Polynomial p = p1 - p2;
@@ -110,7 +110,7 @@ void MainWindow::on_plusButton_clicked() {
         d2.exec();
         if (!ok) return;
     } catch(const char* x) {
-        QMessageBox::information(nullptr, "Error", x);
+        QMessageBox::information(nullptr, "ОШИБКА БЛЯТЬ", x);
         return;
     }
     Polynomial p = p1 + p2;
@@ -131,7 +131,7 @@ void MainWindow::on_equalButton_clicked() {
         d2.exec();
         if (!ok) return;
     } catch(const char* x) {
-        QMessageBox::information(nullptr, "Error", x);
+        QMessageBox::information(nullptr, "ОШИБКА БЛЯТЬ", x);
         return;
     }
     bool p = (p1 == p2);
@@ -149,7 +149,7 @@ void MainWindow::on_enterButton_clicked() {
         ss << s;
         ss >> p;
     } catch (const char* x) {
-        QMessageBox::information(nullptr, "Error", x);
+        QMessageBox::information(nullptr, "ОШИБКА БЛЯТЬ", x);
         return;
     }
     AddAPolynomial(p);
@@ -163,27 +163,28 @@ void MainWindow::on_derButton_clicked() {
         ChoiceDialog d(&lst, &p, &ok);
         d.exec();
         if (!ok) return;
-    } catch(const char* x) {
-        QMessageBox::information(nullptr, "Error", x);
+    } catch (const char* x) {
+        QMessageBox::information(nullptr, "ОШИБКА БЛЯТЬ", x);
         return;
     }
     ll x, n;
     if (!ok) return;
     std::string s = QInputDialog::getText(nullptr, "", "Enter the variable", QLineEdit::Normal, "", &ok).toStdString();
+    if (!ok) return;
     if (s.size() != 1 || s[0] < 'a' || s[0] > 'z') {
-        QMessageBox::information(nullptr, "Error", "WHAT THE FUCK IS THIS PIECE O' SHIT U STUPID FUCKER");
+        QMessageBox::information(nullptr, "ОШИБКА БЛЯТЬ", "ЧЕ ЗА ХУЙНЮ ТЫ ВВЕЛ ЕПТА");
         return;
     }
     n = s[0] - 'a';
     s = QInputDialog::getText(nullptr, "", "Enter the order", QLineEdit::Normal, "", &ok).toStdString();
     if (!ok) return;
     if (s.empty()) {
-        QMessageBox::information(nullptr, "Error", "WHAT THE FUCK IS THIS PIECE O' SHIT U STUPID FUCKER");
+        QMessageBox::information(nullptr, "ОШИБКА БЛЯТЬ", "ЧЕ ЗА ХУЙНЮ ТЫ ВВЕЛ ЕПТА");
         return;
     }
     for (int i = 0; i < s.size(); ++i) {
         if (s[i] < '0' || s[i] > '9') {
-            QMessageBox::information(nullptr, "Error", "WHAT THE FUCK IS THIS PIECE O' SHIT U STUPID FUCKER");
+            QMessageBox::information(nullptr, "ОШИБКА БЛЯТЬ", "ЧЕ ЗА ХУЙНЮ ТЫ ВВЕЛ ЕПТА");
             return;
         }
     }
@@ -203,7 +204,7 @@ void MainWindow::on_valueButton_clicked() {
         d.exec();
         if (!ok) return;
     } catch(const char* x) {
-        QMessageBox::information(nullptr, "Error", x);
+        QMessageBox::information(nullptr, "ОШИБКА БЛЯТЬ", x);
         return;
     }
     std::vector<ld> pnt(26, 1);
@@ -214,7 +215,7 @@ void MainWindow::on_valueButton_clicked() {
         std::string s = QInputDialog::getText(nullptr, "", ((std::string)"Enter the value of variable " + (char)(i + 'a')).data(), QLineEdit::Normal, "", &ok).toStdString();
         if (!ok) return;
         if (s.size() == 0) {
-            QMessageBox::information(nullptr, "Error", "WHAT THE FUCK IS THIS PIECE O' SHIT U STUPID FUCKER");
+            QMessageBox::information(nullptr, "ОШИБКА БЛЯТЬ", "ЧЕ ЗА ХУЙНЮ ТЫ ВВЕЛ ЕПТА");
             return;
         }
         sss.str("");
@@ -223,11 +224,11 @@ void MainWindow::on_valueButton_clicked() {
         try {
             sss >> m;
             if (m.used().count()) {
-                throw "WHAT THE FUCK IS THIS PIECE O' SHIT U STUPID FUCKER";
+                throw "ЧЕ ЗА ХУЙНЮ ТЫ ВВЕЛ ЕПТА";
             }
             pnt[i] = m.getCoef();
         } catch (const char* x) {
-            QMessageBox::information(nullptr, "Error", x);
+            QMessageBox::information(nullptr, "ОШИБКА БЛЯТЬ", x);
             return;
         }
     }
@@ -235,7 +236,31 @@ void MainWindow::on_valueButton_clicked() {
 }
 
 void MainWindow::on_rootsButton_clicked() {
-
+    Polynomial p;
+    bool ok;
+    try {
+        ChoiceDialog d(&lst, &p, &ok);
+        d.exec();
+        if (!ok) return;
+    } catch (const char* x) {
+        QMessageBox::information(nullptr, "ОШИБКА БЛЯТЬ", x);
+        return;
+    }
+    std::vector<ll> ans = p.roots();
+    std::sort(ans.begin(), ans.end());
+    ll sz = std::unique(ans.begin(), ans.end()) - ans.begin();
+    while (ans.size() > sz) ans.pop_back();
+    if (ans.empty()) QMessageBox::information(nullptr, "", "This polynom has no roots");
+    else if (ans.size() == 1 && ans[0] == INT64_MAX) QMessageBox::information(nullptr, "", "Every number is a root of this polynom");
+    else {
+        std::string s;
+        for (ll &x : ans) {
+            s += std::to_string(x) + ", ";
+        }
+        s.pop_back();
+        s.pop_back();
+        QMessageBox::information(nullptr, "Roots", ((ans.size() == 1 ? "The root of this polynom is " : "The roots of this polynom are ") + s).data());
+    }
 }
 
 
@@ -281,5 +306,9 @@ void MainWindow::on_magicButton_clicked() {
     ui->rootsButton->setPalette(QPalette(colors[rnd() % 6]));
     ui->scrollAreaWidgetContents->setPalette(QPalette(colors[rnd() % 6]));
     ui->scrollArea->setPalette(QPalette(colors[rnd() % 6]));
+    ui->centralwidget->setPalette(QPalette(colors[rnd() % 6]));;
+    ui->menubar->setPalette(QPalette(colors[rnd() % 6]));
+    ui->statusbar->setPalette(QPalette(colors[rnd() % 6]));
+    ui->verticalLayoutWidget->setPalette(QPalette(colors[rnd() % 6]));
 }
 
