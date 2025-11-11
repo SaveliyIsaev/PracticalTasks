@@ -15,28 +15,27 @@ public:
   virtual void erase(ll x) override {
     erase(root, x);
   }
-  virtual std::string getInfo() override {
-    if (!root) return "";
-    return std::to_string(root->key);
+  virtual std::pair<ll, std::string> getInfo() override {
+    if (!root) return {0, ""};
+    return {root->key, std::to_string(root->key) + "0"};
   }
   virtual std::pair<BST*, BST*> split(ll x) override {
     Node *lx, *rx;
     split(root, x, lx, rx);
-    AVL *lt = new AVL(lx), *rt = new AVL(rx);
+    AVL *lt = new AVL(*lx), *rt = new AVL(*rx);
     root = merge(lx, rx);
     return {lt, rt};
   }
-  virtual BST* rightSubree() override {
-    if (!root) return 0x0;
-    AVL *a = new AVL;
-    a->root = root->rx;
-    return a;
+  virtual BST* rightSubtree() override {
+    if (!root) return new AVL();
+    return new AVL(root->rx);
   }
   virtual BST* leftSubtree() override {
-    if (!root) return 0x0;
-    AVL *a = new AVL;
-    a->root = root->lx;
-    return a;
+    if (!root) return new AVL();
+    return new AVL(root->lx);
+  }
+  virtual bool empty() override {
+    return !root;
   }
   private:
   struct Node {
@@ -44,6 +43,30 @@ public:
     Node* lx = nullptr, *rx = nullptr;
     Node() {}
     Node(ll x) : key(x) {}
+    Node(Node& n) : key(n.key), h(n.h) {
+      if (n.lx) lx = new Node(*n.lx);
+      if (n.rx) rx = new Node(*n.rx);
+    }
+    Node(Node&& n) {
+      key = n.key;
+      h = n.h;
+      std::swap(lx, n.lx);
+      std::swap(rx, n.rx);
+    }
+    Node& operator=(Node& n) {
+      key = n.key;
+      h = n.h;
+      if (n.lx) lx = new Node(*n.lx);
+      if (n.rx) rx = new Node(*n.rx);
+      return *this;
+    }
+    Node& operator=(Node&& n) {
+      key = n.key;
+      h = n.h;
+      std::swap(lx, n.lx);
+      std::swap(rx, n.rx);
+      return *this;
+    }
     ~Node() {
       if (lx) {
         delete lx;
@@ -55,11 +78,14 @@ public:
       }
     }
   } *root = 0x0;
-  AVL(Node*& n) {
-    root = new Node(*n);
-  }
-  AVL(Node*&& n) {
+  AVL(Node* n) {
     std::swap(root, n);
+  }
+  AVL(Node& n) {
+    root = new Node(n);
+  }
+  AVL(Node&& n) {
+    std::swap(*root, n);
   }
   void insert(Node*& n, ll x) {
     if (!n) {
